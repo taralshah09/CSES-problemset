@@ -3,31 +3,40 @@
 
 using namespace std;
 
-ll maxSubarraySum(vector<ll> &arr) {
-    ll res = arr[0];
-    ll maxEnding = arr[0];
+ll maxSubarraySum(vector<ll> &arr)
+{
+    ll res = LLONG_MIN;
+    ll ans = 0;
 
-    for (int i = 1; i < arr.size(); i++) {
-      
-        maxEnding = max(maxEnding + arr[i], arr[i]);
-        res = max(1LL*res, 1LL*maxEnding);
+    for (int i = 0; i < arr.size(); i++)
+    {
+        ans += arr[i];
+        res = max(res, ans);
+
+        if (ans < 0)
+        {
+            ans = 0;
+        }
     }
     return res;
 }
 
-
 void solve()
-{   
+{
     int n;
-    cin>>n;
-    
-    vector<ll>arr(n);
-    for(int i = 0;i<n;i++)cin>>arr[i];
+    cin >> n;
 
-    cout<<maxSubarraySum(arr)<<endl;
+    vector<ll> arr(n);
+    for (int i = 0; i < n; i++)
+        cin >> arr[i];
+
+    cout << maxSubarraySum(arr) << endl;
 }
 
 int main()
 {
-   solve();
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+
+    solve();
 }
